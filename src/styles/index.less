@@ -1,0 +1,40 @@
+.avatar-uploader{
+  text-align: center;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
+// 覆盖富文本样式
+// 为何要加前缀选择器，提高选择器的优先级，让以下样式仅仅在发布文章组件下生效。
+.container-publish .ql-editor{
+  height: 300px;
+}
+.container-publish .ql-toolbar.ql-snow{
+  padding: 0 8px;
+}
+
+// 覆盖对话框样式
+.my-image .el-dialog__body{
+  padding-bottom: 0;
+}
