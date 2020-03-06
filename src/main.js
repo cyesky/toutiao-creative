@@ -20,7 +20,6 @@ Vue.use(plugin)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
 
-
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 
