@@ -101,45 +101,47 @@ export default {
           // 登录按钮禁用、等待
           this.isActive = true
 
+          this.loginAct()
+
           // A. 人机交互验证
           //    获得人机交互验证的秘钥信息
-          let pro = this.$http.get(`/captchas/${this.loginForm.mobile}`)
-          pro
-            .then(result => {
-              // 对象解构赋值
-              let { data } = result.data
-              // axios请求成功
-              // 生成极验验证"窗口"
-              // 请检测data的数据结构， 保证data.gt, data.challenge, data.success有值
-              window.initGeetest({
-                // 以下配置参数来自服务端 SDK
-                gt: data.gt,
-                challenge: data.challenge,
-                offline: !data.success,
-                new_captcha: true,
-                product: 'bind' // 隐藏按钮，通过登录按钮激活
-              }, captchaObj => {
-                // 这里可以调用验证实例 captchaObj 的实例方法
-                captchaObj.onReady(() => {
-                  // 验证码ready之后才能调用verify方法显示验证码
-                  // 生成窗口
-                  captchaObj.verify()
-                  // 把窗口对象赋予给ctaObj对象
-                  this.ctaObj = captchaObj
-                  // 登录按钮状态恢复
-                  this.isActive = false
-                }).onSuccess(() => {
-                  // 人的行为正确，登录后台系统
-                  // B. axios发送请求进行账号“真实性校验”，登录后台
-                  this.loginAct()
-                }).onError(() => {
-                  // your code
-                })
-              })
-            })
-            .catch(err => {
-              return this.$message.error('获得人机秘钥信息有错误：' + err)
-            })
+          // let pro = this.$http.get(`/captchas/${this.loginForm.mobile}`)
+          // pro
+          //   .then(result => {
+          //     // 对象解构赋值
+          //     let { data } = result.data
+          //     // axios请求成功
+          //     // 生成极验验证"窗口"
+          //     // 请检测data的数据结构， 保证data.gt, data.challenge, data.success有值
+          //     window.initGeetest({
+          //       // 以下配置参数来自服务端 SDK
+          //       gt: data.gt,
+          //       challenge: data.challenge,
+          //       offline: !data.success,
+          //       new_captcha: true,
+          //       product: 'bind' // 隐藏按钮，通过登录按钮激活
+          //     }, captchaObj => {
+          //       // 这里可以调用验证实例 captchaObj 的实例方法
+          //       captchaObj.onReady(() => {
+          //         // 验证码ready之后才能调用verify方法显示验证码
+          //         // 生成窗口
+          //         captchaObj.verify()
+          //         // 把窗口对象赋予给ctaObj对象
+          //         this.ctaObj = captchaObj
+          //         // 登录按钮状态恢复
+          //         this.isActive = false
+          //       }).onSuccess(() => {
+          //         // 人的行为正确，登录后台系统
+          //         // B. axios发送请求进行账号“真实性校验”，登录后台
+          //         this.loginAct()
+          //       }).onError(() => {
+          //         // your code
+          //       })
+          //     })
+          //   })
+          //   .catch(err => {
+          //     return this.$message.error('获得人机秘钥信息有错误：' + err)
+          //   })
         }
       })
     },
@@ -150,6 +152,7 @@ export default {
         store.setUser(res.data.data)
         this.$router.push('/')
       } catch (e) {
+        this.isActive = false
         this.$message.error('手机号或验证码错误')
       }
     }
