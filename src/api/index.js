@@ -5,7 +5,7 @@ import router from '@/router'
 import JSONBIGINT from 'json-bigint'
 
 // 1. 默认配置
-axios.defaults.baseURL = 'http://api-toutiao-web.itheima.net/mp/v1_0/'
+axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 // 配置头部的代码不能在此处定义。
 // 这个里的代码之后在刷新页面后只会执行一次。
 // axios.defaults.headers.Authorization = `Bearer ${store.getUser().token}`
