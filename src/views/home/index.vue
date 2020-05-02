@@ -84,9 +84,13 @@ export default {
   },
   created () {
     // 从本地获取用户信息
-    const user = store.getUser()
-    this.name = user.name
-    this.photo = user.photo
+    // const user = store.getUser()
+    // this.name = user.name
+    // this.photo = user.photo
+    this.$http('/user/profile').then(res => {
+      this.name = res.data.data.name
+      this.photo = res.data.data.photo
+    })
     // 绑定事件，先绑定后触发，越早绑定越好。
     eventBus.$on('updateUserName', (name) => {
       this.name = name
